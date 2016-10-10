@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Taling Input From User in a Loop 
+            int[] arr = new int[6];
+            int temp;
+            for (int i=0;i<6;i++)
+            {
+                Console.WriteLine("Please Enter a Number for Position " + i + ":");
+                arr[i] = Convert.ToInt16(Console.ReadLine());
+            }
+            //Print array values
+            for (int i = 0; i < 6; i++ )
+            {
+                Console.Write(arr[i]);
+                Console.Write("\t");
+            }
+            Console.Read();
+            for (int i = 0; i < 6;i++ )
+            {
+                for (int j = i + 1; j < 6; j++ )
+                {
+                    if(arr[j]<arr[i]){
+                        temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+                    //checking sorting
+                    for (int p = 0; p < 6; p++)
+                    {
+                        Console.Write(arr[p]);
+                        Console.Write("\t");
+                    }
+                    Console.Read();
+                }
+            }
+            //Print array sort values
+            for (int i = 0; i < 6; i++)
+            {
+                Console.Write(arr[i]);
+                Console.Write("\t");
+            }
+            Console.Read();
+            
+        }
+    }
+}
