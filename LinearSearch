@@ -3,29 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace linearSearch
+namespace ConsoleApplication12
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int num = Convert.ToInt32( Console.ReadLine());
-            int[] theArray = { 1, 3, 5, 7, 9 };
-            PrintArray(theArray, num);
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine(" Welcome to Linear Search Program");
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Please Enter a Number: ");
+            int num = Convert.ToInt16(Console.ReadLine());
+            int[] arr = new int[] {10,20,30,40,50,60,70};
+            LinearSearch(arr, num);
         }
-
-        static void PrintArray(int[] arr, int S)
+        static void LinearSearch(int[] arr, int SearchNum)
         {
-            int i, flag = 1;
-            for (i = 0; i < arr.Length; i++)
+            int i, flag=1;
+            for (i=0; i < arr.Length; i++ )
             {
-                if (arr[i] == S)
+
+                if (arr[i] == SearchNum)
                 {
-                    Console.WriteLine("Searching Successfull!");
+                    Console.WriteLine("Searching Successfull!\n" + SearchNum + " is exsist on index: " + i);
                     flag = 0;
                 }
             }
-            if(flag == 1)
+            if (flag == 1)
             {
                 Console.WriteLine("Searching Failed!");
             }
