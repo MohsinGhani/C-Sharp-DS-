@@ -1,0 +1,13 @@
+static void insert(int index, int num, int last)
+        {
+            for (int i=last;i>index;i--)
+                    arr[i+1] = arr[i];
+            arr[index] = num;
+            return;
+        }
+
+static void remove(int index, int last){
+            for (int i = index; i < last; index++)
+                arr[i] = arr[i + 1];
+            return;
+        }
