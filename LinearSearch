@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace linearSearch
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num = Convert.ToInt32( Console.ReadLine());
+            int[] theArray = { 1, 3, 5, 7, 9 };
+            PrintArray(theArray, num);
+        }
+
+        static void PrintArray(int[] arr, int S)
+        {
+            int i, flag = 1;
+            for (i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == S)
+                {
+                    Console.WriteLine("Searching Successfull!");
+                    flag = 0;
+                }
+            }
+            if(flag == 1)
+            {
+                Console.WriteLine("Searching Failed!");
+            }
+        }
+    }
+}
