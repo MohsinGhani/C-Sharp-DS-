@@ -1,0 +1,147 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace singleLinkedList
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            singleList sl = new singleList();
+            sl.head = null;
+            sl.traverse();
+            for (int i=0;i<8;i++)       //Populating the linked list
+            {
+                Node temp = new Node();
+                temp.data = i * 5;
+                temp.next = null;
+                sl.insert(null, temp);
+                sl.traverse();
+            }
+            if (sl.search(21) == null)
+                Console.WriteLine("Number 21 does not exist in the list");
+            Node temp1 = sl.search(25);
+            if (temp1 != null)
+            {
+                Node temp2 = new Node();
+                temp2.data = 27;
+                temp2.next = null;
+                sl.insert(temp1, temp2);
+                sl.traverse();
+            }
+            sl.remove(25);
+            sl.traverse();
+            Console.Read();     //This line is inserted to stop the program before exit
+        }
+    }
+
+    class singleList
+    {
+        public Node head;
+
+        public bool traverse()
+        {
+            if (head == null)
+                Console.WriteLine("The list is empty");
+            else
+            {
+                Node temp = head;
+                Console.WriteLine("Contents of the list are as follows: -");
+                Console.Write(temp.data);
+                while (temp.next != null)
+                {
+                    temp = temp.next;
+                    Console.Write(" --> " + temp.data);
+                }
+                Console.WriteLine();
+            }
+            return true;
+        }
+
+        public Node search(int value)
+        {
+            if (head == null)
+                return null;
+            else
+            {
+                Node temp = head;
+                while (temp != null)
+                {
+                    if (temp.data == value)
+                        break;
+                    temp = temp.next;
+                }
+                return temp;
+            }
+        }
+
+        public bool remove(int value)
+        {
+            if (head == null)
+                return false;
+            else
+            {      //current has some value, it means newNode is to be inserted after the given current Node
+                Node temp = head;
+                Node prev = null;
+                while (temp != null)
+                {
+                    if(temp.data == value)
+                        break;
+                    prev = temp;
+                    temp = temp.next;
+                }
+                if (temp == null)
+                    return false;
+                else
+                {
+                    if (prev == null)
+                        head = temp;
+                    else
+                        prev.next = temp.next;
+                    return true;
+                }
+            }
+        }
+
+        public bool insert(Node current, Node newN)
+        {
+            if (current == null) {  //current == null means newNode is to be inserted at the end
+                if(head==null)
+                    head = newN;
+                else
+                {
+                    Node temp = head;
+                    while (temp.next!=null)
+                        temp = temp.next;
+                    temp.next = newN;
+                }
+                return true;
+            }
+            else {      //current has some value, it means newNode is to be inserted after the given current Node
+                if(head == null)
+                    return false;
+                else {
+                    Node temp = head;
+                    while (temp != current && temp != null)
+                        temp = temp.next;
+                    if(temp != current)
+                        return false;
+                    else {
+                        newN.next = temp.next;
+                        temp.next = newN;
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    class Node
+    {
+        public int data;
+        public Node next;
+    }
+}
