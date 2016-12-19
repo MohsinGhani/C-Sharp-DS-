@@ -18,10 +18,15 @@ struct patient
         char month[10];
         char year[4];
     }dob;
+    char disease[30];
     char bloodGroup[5]; //O+ O- A+ A- B+ B- AB+ AB-
     char address[200];
     char contactNo[11];
     char email[100];
+    char currentDate[50];
+    //for check up time
+    char checkUpDate[50];
+    char medicineName[500];
 }p;
 
 void about()
@@ -40,29 +45,35 @@ void about()
  {
      system("cls");
      puts("\n\t\t ****** ADD NEW PATIENT ******") ;
-     puts("\n\t\t-------------------------------");
-     puts("\n\t\tEnter Patient ID: ");
+     printf("\n\t\t-------------------------------");
+     printf("\n\t\tWRITE INFORMATION ABOUT PATIENT");
+     printf("\n\t\t-------------------------------");
+     printf("\n\t\tEnter Patient ID: ");
      scanf("%s", &p.id);
-     puts("\n\t\tEnter Patient First Name: ");
+     printf("\n\t\tEnter First Name: ");
      scanf("%s", &p.fName);
-     puts("\n\t\tEnter Patient Last Name: ");
+     printf("\n\t\tEnter Last Name: ");
      scanf("%s", &p.lName);
-     puts("\n\t\tEnter Patient Gender: <M/F>");
+     printf("\n\t\tEnter Gender <M/F>: ");
      scanf("%s", &p.gender);
-     puts("\n\t\tEnter Date Of Birth: ");
+     printf("\n\t\tEnter Date Of Birth (Day): ");
      scanf("%s",&p.dob.day);
-     puts("\n\t\tEnter Date Of Birth: ");
+     printf("\n\t\tEnter Date Of Birth (month): ");
      scanf("%s",&p.dob.month);
-     puts("\n\t\tEnter Date Of Birth: ");
+     printf("\n\t\tEnter Date Of Birth (Year): ");
      scanf("%s",&p.dob.year);
-     puts("\n\t\tEnter Patient Blood Group: ");
+     printf("\n\t\tEnter Disease Name: ");
+     scanf("%s",&p.disease);
+     printf("\n\t\tEnter Patient Blood Group: ");
      scanf("%s", &p.bloodGroup);
-     puts("\n\t\tEnter Patient Address: ");
+     printf("\n\t\tEnter Patient Address: ");
      scanf("%s", &p.address);
-     puts("\n\t\tEnter Patient Contact Number: ");
+     printf("\n\t\tEnter Patient Contact Number: ");
      scanf("%s", &p.contactNo);
-     puts("\n\t\tEnter Patient Email: ");
+     printf("\n\t\tEnter Patient Email: ");
      scanf("%s", &p.email);
+     printf("\n\t\tEnter Current Date: ");
+     scanf("%s", &p.currentDate);
      FILE *patient;
      //////// Concatenate Id with .txt ////////////
      char *strcat(char *dest, const char *src);
@@ -71,15 +82,88 @@ void about()
      strcat(patientfileName, p.id);
      strcat(patientfileName, ".txt"); //concatenate .txt with id
      patient = fopen(patientfileName, "w");
-     fprintf(patient, "ID: %s\n",p.id);
-     fprintf(patient, "First Name: %s\n",p.fName);
-     fprintf(patient, "Last Name: %s\n",p.lName);
-     fprintf(patient, "Gender: %s\n",p.gender);
-     fprintf(patient, "Date of Birth: %s / %s / %s\n",p.dob.day,p.dob.month,p.dob.year);
-     fprintf(patient, "Blood Group: %s\n",p.bloodGroup);
-     fprintf(patient, "Address: %s\n",p.address);
-     fprintf(patient, "Contact Number: %s\n",p.contactNo);
-     fprintf(patient, "Email Address: %s\n",p.email);
+     fprintf(patient, "\t\t\nID: %s\n\n",p.id);
+     fprintf(patient, "\t\tFirst Name: %s\n\n",p.fName);
+     fprintf(patient, "\t\tLast Name: %s\n\n",p.lName);
+     fprintf(patient, "\t\tGender: %s\n\n",p.gender);
+     fprintf(patient, "\t\tDate of Birth: %s-%s-%s\n\n",p.dob.day,p.dob.month,p.dob.year);
+     fprintf(patient, "\t\tDisease Name: %s\n\n",p.disease);
+     fprintf(patient, "\t\tBlood Group: %s\n\n",p.bloodGroup);
+     fprintf(patient, "\t\tAddress: %s\n\n",p.address);
+     fprintf(patient, "\t\tContact Number: %s\n\n",p.contactNo);
+     fprintf(patient, "\t\tEmail Address: %s\n\n",p.email);
+     fprintf(patient, "\t\tRegistration Date: %s\n",p.currentDate);
+     fprintf(patient, "\t\t-------------------------------\n");
+     fclose(patient);
+ }
+
+ void checkUp()
+ {
+     system("cls");
+     puts("\n\t\t ****** PATIENT CHECK UP ******") ;
+     printf("\n\t\t-------------------------------");
+     printf("\n\t\tUPDATE INFORMATION ABOUT PATIENT");
+     printf("\n\t\t-------------------------------");
+     printf("\n\t\tEnter Patient ID for Check Up: ");
+     scanf("%s", &p.id);
+     FILE *patient;
+     //////// Concatenate Id with .txt ////////////
+     char *strcat(char *dest, const char *src);
+     char patientfileName[2];
+     strcpy(patientfileName, "db/");
+     strcat(patientfileName, p.id);
+     strcat(patientfileName, ".txt"); //concatenate .txt with id
+     patient = fopen(patientfileName, "r");
+     char c;
+     do
+     {
+         c = fgetc(patient);
+         printf("%c", c);
+     }
+     while(c != EOF);
+     fclose(patient);
+     //Update Coding Start
+     printf("\n\t\tEnter Check up Date: ");
+     scanf("%s", &p.checkUpDate);
+     printf("\n\t\tEnter Medicine Names: ");
+     scanf("%s", &p.medicineName);
+     char *strcat(char *dest, const char *src);
+     char patientfileCheckUp[2]; //change the file name because i am use this name previews lines
+     strcpy(patientfileCheckUp, "db/");
+     strcat(patientfileCheckUp, p.id);
+     strcat(patientfileCheckUp, ".txt");
+     //printf("%s", patientfileCheckUp);
+     patient = fopen(patientfileCheckUp, "a+");
+     fprintf(patient, "\t\tCheck Up Date: %s\n\n",p.checkUpDate);
+     fprintf(patient, "\t\tMedicine Names: %s\n",p.medicineName);
+     fprintf(patient, "\t\t-------------------------------\n");
+     fclose(patient);
+ }
+
+void search()
+ {
+     system("cls");
+     puts("\n\t\t ****** SEARCH NOW THROUH ID ******") ;
+     printf("\n\t\t-------------------------------");
+     printf("\n\t\t*** INFORMATION ABOUT PATIENT ***");
+     printf("\n\t\t-------------------------------");
+     printf("\n\t\tEnter Patient ID for search: ");
+     scanf("%s", &p.id);
+     FILE *patient;
+     //////// Concatenate Id with .txt ////////////
+     char *strcat(char *dest, const char *src);
+     char patientfileName[2];
+     strcpy(patientfileName, "db/");
+     strcat(patientfileName, p.id);
+     strcat(patientfileName, ".txt"); //concatenate .txt with id
+     patient = fopen(patientfileName, "r");
+     char c;
+     do
+     {
+         c = fgetc(patient);
+         printf("%c", c);
+     }
+     while(c != EOF);
      fclose(patient);
  }
 
@@ -103,6 +187,7 @@ int main()
          puts("\n\t\t-------------------------------");
          puts("\n\t\t Enter 'A' to Add Patient  ");
          puts("\n\t\t Enter 'U' to Update Patient  ");
+         puts("\n\t\t Enter 'S' to Search Patient  ");
          puts("\n\t\t Enter 'B' for Back to Home  ");
          puts("\n\t\t Enter 'Q' to Quit Project  ");
          printf("\n\t\t-------------------------------\n\n\t\t  ");
@@ -111,11 +196,19 @@ int main()
          {
              addPatient();
              getch();
+             goto mainhome;
          }
          else if(select == 'U' || select == 'u')
          {
-             printf("Update Patient");
+             checkUp();
              getch();
+             goto mainhome;
+         }
+         else if(select == 'S' || select == 's')
+         {
+             search();
+             getch();
+             goto mainhome;
          }
          else if(select == 'B' || select == 'b')
          {
