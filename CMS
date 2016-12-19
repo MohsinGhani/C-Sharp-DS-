@@ -5,11 +5,24 @@
 #include<stdlib.h>
 #include<time.h>
 #include<dos.h>
+#include <string.h>
 
-void start()
+struct patient
 {
-
-}
+    char id[10];
+    char fName[20];
+    char lName[20];
+    char gender[20];
+    struct dateOfBirth{
+        char day[6];
+        char month[10];
+        char year[4];
+    }dob;
+    char bloodGroup[5]; //O+ O- A+ A- B+ B- AB+ AB-
+    char address[200];
+    char contactNo[11];
+    char email[100];
+}p;
 
 void about()
  {
@@ -21,6 +34,53 @@ void about()
  printf("\n\n\tscore you will secure. Your score will be calculated and displayed");
  printf("\n\n\tat the end and displayed. If you secure highest score, your score");
  printf("\n\n\twill be recorded. So BEST OF LUCK.");
+ }
+
+ void addPatient()
+ {
+     system("cls");
+     puts("\n\t\t ****** ADD NEW PATIENT ******") ;
+     puts("\n\t\t-------------------------------");
+     puts("\n\t\tEnter Patient ID: ");
+     scanf("%s", &p.id);
+     puts("\n\t\tEnter Patient First Name: ");
+     scanf("%s", &p.fName);
+     puts("\n\t\tEnter Patient Last Name: ");
+     scanf("%s", &p.lName);
+     puts("\n\t\tEnter Patient Gender: <M/F>");
+     scanf("%s", &p.gender);
+     puts("\n\t\tEnter Date Of Birth: ");
+     scanf("%s",&p.dob.day);
+     puts("\n\t\tEnter Date Of Birth: ");
+     scanf("%s",&p.dob.month);
+     puts("\n\t\tEnter Date Of Birth: ");
+     scanf("%s",&p.dob.year);
+     puts("\n\t\tEnter Patient Blood Group: ");
+     scanf("%s", &p.bloodGroup);
+     puts("\n\t\tEnter Patient Address: ");
+     scanf("%s", &p.address);
+     puts("\n\t\tEnter Patient Contact Number: ");
+     scanf("%s", &p.contactNo);
+     puts("\n\t\tEnter Patient Email: ");
+     scanf("%s", &p.email);
+     FILE *patient;
+     //////// Concatenate Id with .txt ////////////
+     char *strcat(char *dest, const char *src);
+     char patientfileName[2];
+     strcpy(patientfileName, "db/");
+     strcat(patientfileName, p.id);
+     strcat(patientfileName, ".txt"); //concatenate .txt with id
+     patient = fopen(patientfileName, "w");
+     fprintf(patient, "ID: %s\n",p.id);
+     fprintf(patient, "First Name: %s\n",p.fName);
+     fprintf(patient, "Last Name: %s\n",p.lName);
+     fprintf(patient, "Gender: %s\n",p.gender);
+     fprintf(patient, "Date of Birth: %s / %s / %s\n",p.dob.day,p.dob.month,p.dob.year);
+     fprintf(patient, "Blood Group: %s\n",p.bloodGroup);
+     fprintf(patient, "Address: %s\n",p.address);
+     fprintf(patient, "Contact Number: %s\n",p.contactNo);
+     fprintf(patient, "Email Address: %s\n",p.email);
+     fclose(patient);
  }
 
 int main()
@@ -49,7 +109,7 @@ int main()
          select=toupper(getch());
          if(select == 'A' || select == 'a')
          {
-             printf("Add New Patient");
+             addPatient();
              getch();
          }
          else if(select == 'U' || select == 'u')
