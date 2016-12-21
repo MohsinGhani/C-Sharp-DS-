@@ -18,7 +18,7 @@ struct patient
         char month[10];
         char year[4];
     }dob;
-    char disease[30];
+    char disease[30]; //flu,thaphoid,polio,virul diseases
     char bloodGroup[5]; //O+ O- A+ A- B+ B- AB+ AB-
     char address[200];
     char contactNo[11];
@@ -26,7 +26,7 @@ struct patient
     char currentDate[50];
     //for check up time
     char checkUpDate[50];
-    char medicineName[500];
+    char medicineName[500]; //ponstan,panadol,fexit,alock
 }p;
 
 void about()
